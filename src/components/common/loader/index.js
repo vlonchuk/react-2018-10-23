@@ -1,7 +1,12 @@
 import React from 'react'
+import { Consumer as TranslateConsumer } from '../../../contexts/translate'
 
 function Loader(props) {
-  return <h3>Loading...</h3>
+  return (
+    <TranslateConsumer>
+      {(dictionary) => <h3>{dictionary.LOADING}</h3>}
+    </TranslateConsumer>
+  )
 }
 
 export default Loader

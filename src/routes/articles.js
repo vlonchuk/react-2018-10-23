@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ArticleList from '../components/article-list'
 import Article from '../components/article'
 import { Route } from 'react-router-dom'
+import { Consumer as TranslateConsumer } from '../contexts/translate'
 
 class ArticlesRoute extends Component {
   render() {
@@ -14,11 +15,15 @@ class ArticlesRoute extends Component {
   }
   getArticle = ({ match }) => {
     return !match ? (
-      <Route
-        path="/articles"
-        exact
-        render={() => <h2>Please select an Article</h2>}
-      />
+      <TranslateConsumer>
+        {(dictionary) => (
+          <Route
+            path="/articles"
+            exact
+            render={() => <h2>{dictionary.SELECT_ARTICLE}</h2>}
+          />
+        )}
+      </TranslateConsumer>
     ) : (
       <Article id={match.params.id} key={match.params.id} isOpen />
     )
